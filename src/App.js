@@ -1,23 +1,48 @@
 import logo from './logo.svg';
 import './App.css';
+import { useStore } from './stores/store';
+
+import { InputGroup } from './components/InputGroup';
 
 function App() {
+
+  const store = useStore()
+
+  const { resultState, resultContent } = store
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <div class="lg:w-1/2 2xl:w-1/3 p-8 rounded-md bg-gray-100">
+        <h1 class="text-3xl font-bold mb-6">
+          Streaming JigsawStack's API Completions in JavaScript
+        </h1>
+        <div id="resultContainer" class="mt-4 h-48 overflow-y-auto">
+          <p class="text-gray-500 text-sm mb-2">
+            {resultState === "WAITING" &&
+              "Waiting for input..."
+            }
+
+            {resultState === "LOADING" &&
+              "Generating..."
+            }
+
+            {resultState === "ABORT" &&
+              "Request aborted"
+            }
+
+            {resultState === "ERROR" &&
+              "Error occurred while generating"
+            }
+
+            {resultState === "SUCCESS" &&
+              resultContent
+            }
+          </p>
+          <p id="resultText" class="whitespace-pre-line"></p>
+        </div>
+        <InputGroup />
+      </div>
     </div>
   );
 }
