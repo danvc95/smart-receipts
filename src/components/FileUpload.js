@@ -1,37 +1,53 @@
 import React, { useState } from 'react';
+import {FILE_KEY} from '../keys'
 
-const FileUpload = () => {
+
+
+
+const FileUpload = ({onFileUpload}) => {
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [itemsCounter, setItemsCounter] = useState(0); // State for items counter
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    console.log('Selected file:', event.target.files[0]);
   };
 
-  const handleFileUpload = () => {
+
+  const handleFileUpload = async () => {
     if (selectedFile) {
-      // Implement file upload logic here
-      console.log('Uploading file:', selectedFile);
+      console.log("Submitting file")
 
-      // Example: using FormData to send the file to a server
-      const formData = new FormData();
-      formData.append('file', selectedFile);
+      const key = selectedFile.name;
+      const endpoint = `https://api.jigsawstack.com/v1/store/file?key=${key}&overwrite=true`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "image/png",
+          "x-api-key": FILE_KEY, // Replace with your actual API key.
+        },
+        body: selectedFile,
+      };
+      const result = await fetch(endpoint, options);
+      const data = await result.json();
 
-      // Example POST request to a server endpoint
-      fetch('/upload', {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('File uploaded successfully:', data);
-      })
-      .catch(error => {
-        console.error('Error uploading file:', error);
-      });
-    } else {
-      alert('Please select a file first.');
+      const fileUrl = `${data.url}?x-api-key=${FILE_KEY}`;
+      console.log("public url:", fileUrl);
+
+
+      console.log("public url:", `${data.url}?x-api-key=${FILE_KEY}`);
+      setItemsCounter(itemsCounter + 1);
+      if(onFileUpload){
+        onFileUpload(fileUrl);
+      }
+      setSelectedFile(null);
+
+
+
+
     }
   };
+
+
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -41,13 +57,17 @@ const FileUpload = () => {
       <input 
         id="file-upload" 
         type="file" 
+        accept="image/*"
         style={{ display: 'none' }} 
         onChange={handleFileChange} 
       />
       {selectedFile && (
-        <div style={{ marginTop: '20px' }}>
-          <p>Selected file: {selectedFile.name}</p>
-          <button onClick={handleFileUpload} style={{ padding: '10px 20px', backgroundColor: '#000', color: '#fff', borderRadius: '8px', cursor: 'pointer' }}>
+        <div>
+          <img src={URL.createObjectURL(selectedFile)} alt="Selected file" style={{ width: '200px', Radius: '8px' }} />
+
+          <button style={{ padding: '10px 10px', backgroundColor: '#000', color: '#fff', borderRadius: '8px', cursor: 'pointer' }}
+            onClick={handleFileUpload}
+          >
             Upload File
           </button>
         </div>
@@ -55,6 +75,7 @@ const FileUpload = () => {
     </div>
   );
 };
+
 
 export default FileUpload;
 

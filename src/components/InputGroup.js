@@ -1,9 +1,9 @@
 import { useRef, useState } from "react"
 import { useStore } from "../stores/store"
-
+import React, { Component } from 'react'
 
 const API_URL = "https://api.jigsawstack.com/v1/prompt_engine";
-const API_KEY = "sk_060103deb6c3b4b3febf4ef33732971b1517cf12d0a85cb75d3dfe2142cc0add612c00558ff10f70d98bb6b85bcc736a64cd941f84b9bf8aa714530d91965e560246MwhommWnIaYeoYW5T";
+const API_KEY = "pk_c8762bce6d654bc3f4f17c2bf983378293275ba483937d1a59e1e26d51735e39ffdcaded872729ada9e90ccd3272c2d00c498d4ae401cf6d87e42bd98ecd9d5e024bfEfDvvqr4MwoQfyRH";
 
 
 function InputGroup() {

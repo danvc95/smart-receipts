@@ -4,10 +4,39 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Outlet, Link } from "react-router-dom";
+
+import {
+  ListView,
+  ItemView,
+  UploadView
+} from "./views";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ListView />,
+  },
+  {
+    path: "/item/:id",
+    element: <ItemView />,
+  },
+  {
+    path: "/upload",
+    element: <UploadView />,
+  }
+]);
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

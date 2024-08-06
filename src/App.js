@@ -5,6 +5,8 @@ import { useStore } from './stores/store';
 import { InputGroup } from './components/InputGroup';
 import FileUpload from './components/FileUpload';
 
+import { Link } from 'react-router-dom';
+
 
 function App() {
 
@@ -45,6 +47,9 @@ function App() {
         </div>
         <InputGroup />
         <FileUpload />
+        
+        <Link to={'/about'}>to about</Link>
+
       </div>
     </div>
   );

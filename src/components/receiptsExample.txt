@@ -1,0 +1,26 @@
+{
+    receiptId: 0,
+    storeName: "Costco",
+    date: "...",
+    subtotal: 900.00,
+    fees: 0.00,
+    taxes: 100.00,
+    total: 1000.00,
+    items: [
+        {
+            name: "OLED TV",
+            qty: 1,
+            category: "Electronics",
+            price: 579.99,
+            notes: "",
+        },
+        {
+            name: "Carrots",
+            qty: 1,
+            category: "Groceries",
+            price: 1.79,
+            notes: "",
+        },
+        ... and so on
+    ],
+}

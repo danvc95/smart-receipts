@@ -1,0 +1,7 @@
+import React, { useState } from 'react';
+
+const VOCR_KEY = "sk_pk_8c6d422ffefb4917d4c98b758dd8c3ee235411ea72ebe0ed3020a03b108da4ed98f0840d9a98db9bb3134bb8d288c6452f5d10fc396864286b3e72e9516707aa024Sj7ufujtSGgmC8DtyM060103deb6c3b4b3febf4ef33732971b1517cf12d0a85cb75d3dfe2142cc0add612c00558ff10f70d98bb6b85bcc736a64cd941f84b9bf8aa714530d91965e560246MwhommWnIaYeoYW5T";
+
+
+
+
