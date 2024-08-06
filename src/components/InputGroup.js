@@ -1,12 +1,14 @@
 import { useRef, useState } from "react"
 import { useStore } from "../stores/store"
 
+
 const API_URL = "https://api.jigsawstack.com/v1/prompt_engine";
-const API_KEY = "sk_418975ff619a660239f59c891cba27852c83ec4cae64137e19fef310986997c8ff3e460132e8c84c68695b771c5d8a8bc98f9001d7f5c1078238189121be27a9024Yp6SeEXpM4XHRkBhAd";
+const API_KEY = "sk_060103deb6c3b4b3febf4ef33732971b1517cf12d0a85cb75d3dfe2142cc0add612c00558ff10f70d98bb6b85bcc736a64cd941f84b9bf8aa714530d91965e560246MwhommWnIaYeoYW5T";
 
 
 function InputGroup() {
   const promptInput = useRef(null)
+  const promptInput2 = useRef(null)
   const generateBtn = useRef(null)
   const stopBtn = useRef(null)
 
@@ -19,9 +21,14 @@ function InputGroup() {
     setResultState("LOADING")
 
     if (!promptInput.current.value) {
-      alert("Please enter a prompt.");
+      alert("Please enter an image url.");
       return;
     }
+
+    if (!promptInput2.current.value) {
+      alert("Please select a file to upload");
+      return;
+    } 
 
     // Disable the generate button and enable the stop button
     generateBtn.disabled = true;
@@ -32,52 +39,28 @@ function InputGroup() {
     const signal = controller.signal;
 
     try {
-      const endpoint = "https://api.jigsawstack.com/v1/prompt_engine";
+       
+      const endpoint = "https://api.jigsawstack.com/v1/vocr";
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": API_KEY, // Replace with your actual API key.
+          "x-api-key": API_KEY, 
         },
         body: JSON.stringify({
-          prompt: "Tell me a story about {about}",
-          inputs: [
-            {
-              key: "about",
-              optional: false,
-              initial_value: "Leaning Tower of Pisa",
-            },
-          ],
-          return_prompt: "Return the result in a markdown format",
+          url: promptInput.current.value,
         }),
       };
+
+
       const result = await fetch(endpoint, options);
       const data = await result.json();
 
-      const prompt_engine_id = data.prompt_engine_id
-      console.log("id", prompt_engine_id)
 
-      const endpoint2 = `https://api.jigsawstack.com/v1/prompt_engine/${prompt_engine_id}`
-      console.log(endpoint2)
-
-      const options2 = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": API_KEY, // Replace with your actual API key.
-      },
-      body: JSON.stringify({
-        input_values: {
-          about: promptInput,
-        },
-      }),
-      };
-      const result2 = await fetch(endpoint2, options2);
-      const data2 = await result2.json();
-      console.log(data2)
+      console.log("id", data)
 
       setResultState("SUCCESS");
-      setResultContent(data2.result)
+      setResultContent(data.context)
 
       // const endpoint = "https://api.jigsawstack.com/v1/prompt_engine/"
 
@@ -112,8 +95,17 @@ function InputGroup() {
         type="text"
         id="promptInput"
         class="w-full px-4 py-2 rounded-md bg-gray-200 placeholder-gray-500 focus:outline-none mt-4"
-        placeholder="Enter prompt..."
+        placeholder="Image URL"
       />
+      <input
+        ref={promptInput}
+        type="text"
+        id="promptInput2"
+        class="w-full px-4 py-2 rounded-md bg-gray-200 placeholder-gray-500 focus:outline-none mt-4"
+        placeholder="Select a file to upload"
+      />
+
+
       <div class="flex justify-center mt-4">
         <button
           ref={generateBtn}

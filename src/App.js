@@ -3,6 +3,8 @@ import './App.css';
 import { useStore } from './stores/store';
 
 import { InputGroup } from './components/InputGroup';
+import FileUpload from './components/FileUpload';
+
 
 function App() {
 
@@ -15,7 +17,7 @@ function App() {
 
       <div class="lg:w-1/2 2xl:w-1/3 p-8 rounded-md bg-gray-100">
         <h1 class="text-3xl font-bold mb-6">
-          Streaming JigsawStack's API Completions in JavaScript
+          Smart Receipts
         </h1>
         <div id="resultContainer" class="mt-4 h-48 overflow-y-auto">
           <p class="text-gray-500 text-sm mb-2">
@@ -42,6 +44,7 @@ function App() {
           <p id="resultText" class="whitespace-pre-line"></p>
         </div>
         <InputGroup />
+        <FileUpload />
       </div>
     </div>
   );
