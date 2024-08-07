@@ -9,13 +9,15 @@ import { Outlet, Link } from "react-router-dom";
 import {
   ListView,
   ItemView,
-  UploadView
+  UploadView,
+  CategoryTotals
 } from "./views";
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+//import CategoryTotals from './views/categoryTotals';
 
 const router = createBrowserRouter([
   {
@@ -23,12 +25,16 @@ const router = createBrowserRouter([
     element: <ListView />,
   },
   {
-    path: "/item/:id",
+    path: "/receipt/:id",
     element: <ItemView />,
   },
   {
     path: "/upload",
     element: <UploadView />,
+  },
+  {
+    path: "/category",
+    element: <CategoryTotals />,
   }
 ]);
 

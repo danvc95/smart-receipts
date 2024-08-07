@@ -1,10 +1,11 @@
+import { useStore } from "../stores/store";
+
 
 /**
  * @param left
  * @param right
  */
 const TitleBar = (props) => {
-
   return (
     <div className="titleBar flex w-full max-w-md">
       <div className="flex-1">
@@ -23,6 +24,7 @@ const TitleBar = (props) => {
         }
       </div>
     </div>
+
   )
 }
 
