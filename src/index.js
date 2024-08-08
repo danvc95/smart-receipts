@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Outlet, Link } from "react-router-dom";
@@ -10,7 +9,8 @@ import {
   ListView,
   ItemView,
   UploadView,
-  CategoryTotals
+  CategoryView,
+  StoryView,
 } from "./views";
 
 import {
@@ -34,7 +34,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/category",
-    element: <CategoryTotals />,
+    element: <CategoryView />,
+  },
+  {
+    path: "/story/:id",
+    element: <StoryView />,
   }
 ]);
 

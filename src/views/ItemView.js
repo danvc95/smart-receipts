@@ -47,8 +47,18 @@ const ItemView = (props) => {
   return (
     <div className="flex flex-col items-center p-4 gap-2">
       <TitleBar
-        left={<Link to="/">Home</Link>}
-        right={<Link to={'/upload'}>Add Receipt</Link>}
+        left={<Link
+          to="/"
+          className="p-2 bg-blue-500 text-white rounded text-center hover:bg-blue-600"
+        >
+          Home
+        </Link>}
+        right={<Link
+          to={`/story/${id}`} 
+          className="p-2 bg-blue-500 text-white rounded text-center hover:bg-blue-600"
+        >
+          Story Time
+        </Link>}
       />
 
       <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">

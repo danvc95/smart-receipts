@@ -1,4 +1,3 @@
-import FileUpload from '../components/FileUpload';
 import React, { useContext, useState } from 'react';
 import TitleBar from '../components/TitleBar';
 import { Link } from 'react-router-dom';
@@ -18,7 +17,12 @@ const ListView = () => {
   return (
     <div className="flex flex-col items-center p-4 gap-2">
       <TitleBar 
-        right={<Link to={'/upload'}>Add Receipt</Link>}
+        right={<Link
+          to="/category"
+          className="p-2 bg-blue-500 text-white rounded text-center hover:bg-blue-600"
+        >
+          Category Totals
+        </Link>}
       />
 
       <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">
@@ -51,11 +55,18 @@ const ListView = () => {
       ) : (
         <div className="p-4 bg-gray-100 rounded-lg text-center">
           <p className="text-gray-600 mb-4">Upload your first receipt :-)</p>
-          <Link to={'/upload'}>Add Receipt</Link>
+
         </div>
       )}
     </div>
-
+    <div className="flex justify-center items-center mt-4">
+    <Link
+      to="/upload"
+      className="w-full max-w-xs p-2 bg-blue-500 text-white rounded text-center hover:bg-blue-600"
+    >
+      Add Receipt
+    </Link>
+  </div>
       </div>
     </div>
   )

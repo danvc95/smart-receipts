@@ -13,7 +13,7 @@ const performVOCR = async (imageFileURL) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": VOCR_KEY, // Replace with your actual API key.
+      "x-api-key": VOCR_KEY,
     },
     body: JSON.stringify({
       url: imageFileURL,
@@ -24,7 +24,7 @@ const performVOCR = async (imageFileURL) => {
         "return the purchase date",
         "return the short name of the store", 
         "return the taxes amount",
-        "z return the total amount spent on items in each category as {Groceries:number, Dining and Restaurants:number, Electronics:number, Clothing and Accessories:number, Health and Beauty:number, Household Supplies:number, Furniture and Home Decor:number, Utilities:number, Transportation:number, Entertainment:number, Travel:number, Education:number, Healthcare:number, Fitness:number, Pets:number, Gifts and Donations:number, Office Supplies:number, Subscriptions and Memberships:number, Automotive:number, Home Improvement:number, Personal Services:number, Financial Services:number, Hobbies and Crafts:number, Childcare:number, Miscellaneous:number}",
+        "tell a shopping story about the purchase in iambic pentameter"
       ]
     }),
   };
@@ -45,7 +45,7 @@ const performVOCR = async (imageFileURL) => {
     "taxes": Object.keys(context)[5],
     "subtotal": Object.keys(context)[1],
     "items": Object.keys(context)[0],
-    "categoryTotals": Object.keys(context)[6],
+    "zstory": Object.keys(context)[6],
   }
 
   // // Get values and populate a cleaner data object model
@@ -58,7 +58,7 @@ const performVOCR = async (imageFileURL) => {
     priceSubtotal: parseFloat(context[dataKeys.subtotal][0]),
     taxes: parseFloat(context[dataKeys.taxes][0]),
     priceTotal: parseFloat(context[dataKeys.total][0]),
-    categoryTotals: context[dataKeys.categoryTotals].map(categoryTotals => JSON.parse(categoryTotals)),
+    zstory: context[dataKeys.zstory],
   }
 
   return newReceiptObject;

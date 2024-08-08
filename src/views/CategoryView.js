@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import { useStore } from '../stores/store';
 
 
-const CategoryTotals = () => {
+const CategoryView = () => {
     const { id } = useParams();
 
     const store = useStore();
     const receipt = store.receiptList[id];
-    console.log(receipt)
+    //console.log(receipt)
   
     const allCategories = ["Groceries", "Dining and Restaurants", "Electronics", "Clothing and Accessories", "Health and Beauty", "Household Supplies", "Furniture and Home Decor", "Utilities", "Transportation", "Entertainment", "Travel", "Education", "Healthcare", "Fitness", "Pets", "Gifts and Donations", "Office Supplies", "Subscriptions and Memberships", "Automotive", "Home Improvement", "Personal Services", "Financial Services", "Hobbies and Crafts", "Childcare", "Miscellaneous"]
   
@@ -47,51 +47,34 @@ const CategoryTotals = () => {
     return (
       <div className="flex flex-col items-center p-4 gap-2">
         <TitleBar
-          left={<Link to="/">CategoryTotals</Link>}
-          right={<Link to={'/upload'}>Add Receipt</Link>}
+          left={<Link
+            to="/"
+            className="p-2 bg-blue-500 text-white rounded text-center hover:bg-blue-600"
+          >
+            Home
+          </Link>}
+          right={<Link
+            to="/upload"
+            className="p-2 bg-blue-500 text-white rounded text-center hover:bg-blue-600"
+          >
+            Add Receipt
+          </Link>}
         />
   
         <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">
-  
-  
-          <div>
-            <div className="flex items-start">
-              <img src={receipt.receiptImageURL} alt={`Thumbnail ${0}`} className="w-20 h-30 object-cover rounded mr-4" />
-              <div className="w-full">
-                <h1 className="text-xl font-bold">{receipt.storeName}</h1>
-                <p className="text-sm text-gray-500">{receipt.purchaseDate}</p>
-  
-                <div className="flex justify-between">
-                  <span className="font-semibold">Subtotal</span>
-                  <span>${receipt.priceSubtotal}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Tax</span>
-                  <span>${receipt.taxes}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Total</span>
-                  <span>${receipt.priceTotal}</span>
-                </div>
-  
-                <div className="flex flex-col gap-2">
-                  {receipt.items.map((item, index) => (
-                    <div key={index} className="flex justify-between">
-                      <div>
-                        <div>{item.name}</div>
-                        <div className="text-xs">{item.quantity}, {item.category}</div>
-                      </div>
-                      <div>${item.price}</div>
-                    </div>
-                  ))}
-                </div>
+          <h1 className="text-xl font-bold mb-4">Category Totals</h1>
+          <div className="flex flex-col gap-2">
+            {Object.entries(test).map(([category, total], index) => (
+              <div key={index} className="flex justify-between">
+                <span className="font-semibold">{category}</span>
+                <span>${total.toFixed(2)}</span>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-    )
+    );
   }
    
    
-   export default CategoryTotals;
+   export default CategoryView;
